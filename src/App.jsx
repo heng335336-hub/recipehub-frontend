@@ -1,4 +1,4 @@
-import { Link, Navigate, Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
+import { Link, Navigate, Route, HashRouter as Router, Routes, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import EmailVerificationBanner from "./components/EmailVerificationBanner";
