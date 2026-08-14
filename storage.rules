@@ -1,0 +1,18 @@
+rules_version = '2';
+
+// Paste this into: Firebase Console -> Storage -> Rules
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // recipes/{fileName}
+    // - Anyone can view recipe images (they're shown to guests too).
+    // - Only logged-in users can upload, and only image files under 5MB.
+    match /recipes/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}

@@ -1,0 +1,45 @@
+rules_version = '2';
+
+// Paste this into: Firebase Console -> Firestore Database -> Rules
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // users/{uid}
+    // - Anyone signed in can read a profile (needed to show recipe authors).
+    // - A user can only create/update their own profile document.
+    // - No one can delete a profile from the client.
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    // recipes/{recipeId}
+    // - Anyone (including guests) can read recipes.
+    // - Only logged-in users can create a recipe, and it must be tagged
+    //   with their own uid as authorId.
+    // - Only the recipe's author can update or delete it.
+    match /recipes/{recipeId} {
+      allow read: if true;
+      allow create: if request.auth != null
+                    && request.resource.data.authorId == request.auth.uid;
+      allow update, delete: if request.auth != null
+                    && resource.data.authorId == request.auth.uid;
+    }
+
+    // contactMessages/{messageId}
+    // - Write-only "mailbox": anyone (including guests) can submit a
+    //   message from the Contact page, but nothing can be read, updated,
+    //   or deleted from the client - only from the Firebase console or a
+    //   trusted backend.
+    match /contactMessages/{messageId} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.email is string
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() > 0;
+    }
+  }
+}
