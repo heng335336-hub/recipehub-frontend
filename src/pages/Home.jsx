@@ -10,6 +10,7 @@ import {
 import { db } from "../firebase/firebaseConfig";
 import RecipeCard from "../components/RecipeCard";
 import { CATEGORIES } from "../constants";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [recentRecipes, setRecentRecipes] = useState([]);
@@ -70,9 +71,9 @@ export default function Home() {
             </form>
 
             <div className="hero-cta">
-              <link href="/recipes" className="btn btn-secondary">
+              <Link to= "/recipes" className="btn btn-secondary">
                 Browse all recipes
-              </link>
+              </Link>
             </div>
           </div>
 
@@ -113,7 +114,7 @@ export default function Home() {
             <div className="eyebrow">Fresh off the stove.</div>
             <h2>Recently added</h2>
           </div>
-          <link href="/recipes">See all recipes →</link>
+          <Link to="/recipes">See all recipes →</Link>
         </div>
 
         {loading && (
