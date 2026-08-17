@@ -70,9 +70,9 @@ export default function Home() {
             </form>
 
             <div className="hero-cta">
-              <a href="/recipes" className="btn btn-secondary">
+              <link href="/recipes" className="btn btn-secondary">
                 Browse all recipes
-              </a>
+              </link>
             </div>
           </div>
 
@@ -110,10 +110,10 @@ export default function Home() {
       <section className="container" style={{ marginTop: "3rem" }}>
         <div className="section-heading">
           <div>
-            <div className="eyebrow">Fresh off the stove</div>
+            <div className="eyebrow">Fresh off the stove.</div>
             <h2>Recently added</h2>
           </div>
-          <a href="/recipes">See all recipes →</a>
+          <link href="/recipes">See all recipes →</link>
         </div>
 
         {loading && (
