@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "../firebase/firebaseConfig";
+import { db } from "../firebase/firebaseConfig";
 import { useAuth } from "../context/AuthContext";
 import RecipeForm from "../components/RecipeForm";
+import { uploadImageToCloudinary } from "../utils/uploadImage";
 
 export default function AddRecipe() {
   const { currentUser, profile } = useAuth();
@@ -21,10 +21,7 @@ export default function AddRecipe() {
       let imageUrl = "";
 
       if (data.imageFile) {
-        const path = `recipes/${currentUser.uid}-${Date.now()}-${data.imageFile.name}`;
-        const imageRef = ref(storage, path);
-        await uploadBytes(imageRef, data.imageFile);
-        imageUrl = await getDownloadURL(imageRef);
+        imageUrl = await uploadImageToCloudinary(data.imageFile);
       }
 
       await addDoc(collection(db, "recipes"), {
