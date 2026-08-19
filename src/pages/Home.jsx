@@ -97,13 +97,13 @@ export default function Home() {
         </div>
         <div className="category-row">
           {CATEGORIES.map((c) => (
-            <a
-              key={c}
-              className="category-chip"
-              href={`/recipes?category=${encodeURIComponent(c)}`}
-            >
-              {c}
-            </a>
+            <Link
+                key={c}
+                className="category-chip"
+                to={`/recipes?category=${encodeURIComponent(c)}`}
+              >
+                {c}
+              </Link>
           ))}
         </div>
       </section>
