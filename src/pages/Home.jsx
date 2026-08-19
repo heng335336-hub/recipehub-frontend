@@ -71,7 +71,7 @@ export default function Home() {
             </form>
 
             <div className="hero-cta">
-              <Link to= "/recipes" className="btn btn-secondary">
+              <Link to="/recipes" className="btn btn-secondary">
                 Browse all recipes
               </Link>
             </div>
@@ -98,12 +98,12 @@ export default function Home() {
         <div className="category-row">
           {CATEGORIES.map((c) => (
             <Link
-                key={c}
-                className="category-chip"
-                to={`/recipes?category=${encodeURIComponent(c)}`}
-              >
-                {c}
-              </Link>
+              key={c}
+              className="category-chip"
+              to={`/recipes?category=${encodeURIComponent(c)}`}
+            >
+              {c}
+            </Link>
           ))}
         </div>
       </section>
