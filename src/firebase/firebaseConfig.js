@@ -17,6 +17,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyCyLNusR3Qof1_ZzmuQrpAPnYcHM2hoFIc",
   authDomain: "recipe-website-15a75.firebaseapp.com",
